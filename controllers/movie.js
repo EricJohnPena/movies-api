@@ -38,4 +38,19 @@ module.exports.getMovies = async (req, res) => {
     } catch (error) {
          return errorHandler(err, req, res);
     }
+};
+
+module.exports.getMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const movie = await Movie.findById(id);
+        if (movie) {
+            return res.status(200).send(movie);
+        }
+        return res.status(404).send({
+            message: "No movie found"
+        })
+    } catch (error) {
+        return errorHandler(err, req, res);
+    }
 }

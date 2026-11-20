@@ -53,4 +53,39 @@ module.exports.getMovie = async (req, res) => {
     } catch (error) {
         return errorHandler(err, req, res);
     }
+};
+
+module.exports.updateMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { title, director, year, description, genre } = req.body;
+        
+        let updatedMovie = {
+            title: title,
+            director: director,
+            year: year,
+            description: description,
+            genre: genre
+        }
+
+        const result = await Movie.findByIdAndUpdate(
+            id,
+            updatedMovie,
+            {new: true, runValidators: true}
+         )
+
+         if(result){
+            return res.status(200).send({
+                message: "Movie updated successfully",
+                updatedMovie: result
+            });
+         }
+        return res.status(404).send({
+            message: "Movie not found"
+        });
+
+
+    } catch (error) {
+        return errorHandler(err, req, res);
+    }
 }

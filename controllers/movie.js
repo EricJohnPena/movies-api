@@ -25,3 +25,17 @@ module.exports.addMovie = async (req, res) => {
         return errorHandler(err, req, res);
     }
 };
+
+module.exports.getMovies = async (req, res) => {
+    try {
+        const movies = await Movie.find({});
+        if (movies.length > 0){
+            return res.status(200).send(movies);
+        }
+        return res.status(404).send({
+            message: "No movies found"
+        })
+    } catch (error) {
+         return errorHandler(err, req, res);
+    }
+}

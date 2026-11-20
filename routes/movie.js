@@ -10,5 +10,8 @@ router.get('/getMovieById/:id', verify, movieController.getMovie);
 router.patch('/updateMovie/:id', verify, verifyAdmin, movieController.updateMovie);
 router.patch('/deleteMovie/:id', verify, verifyAdmin, movieController.deleteMovie);
 
+// For Comments
+router.patch('/addComment/:id', verify, movieController.addComment);
+
 
 module.exports = router;

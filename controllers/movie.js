@@ -110,3 +110,28 @@ module.exports.deleteMovie = async (req, res) => {
         return errorHandler(error, req, res);
     }
 };
+
+module.exports.addComment = async (req, res) => {
+    try {
+        const movieId = req.params.id; 
+        const newComment = {
+            userId: req.user?.id || req.user?._id,
+            comment: req.body.comment
+        };
+
+        const movie = await Movie.findById(movieId);
+        if (!movie) {
+            return res.status(404).send({ message: "Movie not found" });
+        }
+
+        movie.comments.push(newComment);
+
+        const updatedMovie = await movie.save();
+        return res.status(200).send({
+            message: "Comment added successfully",
+            updatedMovie: updatedMovie
+        });
+    } catch (err) {
+        return errorHandler(err, req, res);
+    }
+};

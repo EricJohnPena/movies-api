@@ -12,6 +12,7 @@ router.patch('/deleteMovie/:id', verify, verifyAdmin, movieController.deleteMovi
 
 // For Comments
 router.patch('/addComment/:id', verify, movieController.addComment);
+router.get('/getComments/:id', verify, movieController.getComments);
 
 
 module.exports = router;

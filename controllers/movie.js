@@ -135,3 +135,22 @@ module.exports.addComment = async (req, res) => {
         return errorHandler(err, req, res);
     }
 };
+
+module.exports.getComments = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const movie = await Movie.findById(id);
+
+        if (!movie) {
+            return res.status(404).send({
+                message: "Movie not found"
+            });
+        }
+
+        return res.status(200).send({
+            comments: movie.comments
+        });
+    } catch (error) {
+        return errorHandler(error, req, res);
+    }
+};

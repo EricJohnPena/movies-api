@@ -88,4 +88,25 @@ module.exports.updateMovie = async (req, res) => {
     } catch (error) {
         return errorHandler(err, req, res);
     }
-}
+};
+
+
+module.exports.deleteMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (!id) {
+            return res.status(400).send({ message: "Movie ID is required in URL parameter" });
+        }
+
+        const deletedMovie = await Movie.findByIdAndDelete(id);
+        if(deletedMovie){
+            return res.status(200).send({
+            message: "Movie deleted successfully"
+            });
+        }
+        return res.status(404).send({ message: "Workout not found" });
+
+    } catch (error) {
+        return errorHandler(error, req, res);
+    }
+};

@@ -8,7 +8,7 @@ router.post('/addMovie', verify, verifyAdmin, movieController.addMovie);
 router.get('/getMovies', verify, movieController.getMovies);
 router.get('/getMovieById/:id', verify, movieController.getMovie);
 router.patch('/updateMovie/:id', verify, verifyAdmin, movieController.updateMovie);
-// router.patch('/deleteMovie/:id', verify, verifyAdmin, movieController.deleteMovie);
+router.patch('/deleteMovie/:id', verify, verifyAdmin, movieController.deleteMovie);
 
 
 module.exports = router;

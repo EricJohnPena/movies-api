@@ -1,12 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require("dotenv");
+const cors = require('cors');
 
 dotenv.config();
 const port = 4000;
-
 //server
 const app = express();
+app.use(cors());
+
+
+
 
 
 //middlewares
